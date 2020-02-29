@@ -188,9 +188,11 @@ export default class Dropdown extends PureComponent {
     };
   }
 
-  componentWillReceiveProps({ value }) {
-    if (value !== this.props.value) {
-      this.setState({ value });
+componentDidUpdate(prevProps, prevState) {
+    if (prevProps.value !== this.props.value) {
+      this.txRef.current.setValue(this.props.value)
+    } else if (prevState.value !== this.state.value) {
+      this.txRef.current.setValue(this.state.value)
     }
   }
 
